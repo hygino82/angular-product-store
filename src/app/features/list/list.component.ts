@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,8 +6,14 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+  styleUrl: './list.component.scss',
 })
 export class ListComponent {
-
+  products: any[] = [];
+  constructor(private httpClient: HttpClient) {}
+  ngOnInit() {
+    this.httpClient.get<any>('/api/products').subscribe((products) => {
+      this.products = products;
+    });
+  }
 }

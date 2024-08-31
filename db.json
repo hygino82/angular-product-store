@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Radio"
+    },
+    {
+      "id": "2",
+      "title": "TV"
+    }
+  ]
+}
