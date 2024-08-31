@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ProductsService } from '../../shared/services/products.service';
+import { Product } from '../../shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-list',
@@ -9,10 +11,11 @@ import { Component } from '@angular/core';
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
-  products: any[] = [];
-  constructor(private httpClient: HttpClient) {}
+  products: Product[] = [];
+  constructor(private readonly productsService: ProductsService) {}
+
   ngOnInit() {
-    this.httpClient.get<any>('/api/products').subscribe((products) => {
+    this.productsService.getAll().subscribe((products) => {
       this.products = products;
     });
   }
