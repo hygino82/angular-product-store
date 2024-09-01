@@ -8,6 +8,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductsService } from '../../shared/services/products.service';
 @Component({
   selector: 'app-create',
   standalone: true,
@@ -21,6 +22,9 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './create.component.scss',
 })
 export class CreateComponent {
+
+  constructor(private readonly productService: ProductsService) { }
+
   form = new FormGroup({
     title: new FormControl<string>('', {
       nonNullable: true,
@@ -29,6 +33,11 @@ export class CreateComponent {
   });
 
   onSubmit() {
-    this.form.controls.title.value;
+    this.productService.post({
+      title: this.form.controls.title.value
+    })
+      .subscribe(() => {
+        alert('Sucesso!');
+      })
   }
 }
